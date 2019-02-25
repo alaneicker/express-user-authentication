@@ -15,12 +15,12 @@ Promise.resolve()
 
 // Authenticate user
 routes.post('/user/authenticate', async (req, res) => {
-  const reqBody = { username: 'alaneicker', password: 'Qawsed44!' };
-  const data = await db.get('SELECT password FROM Users WHERE username = ?', reqBody.username);
-  const isValid = await passwordHash.compare(reqBody.password, data.password);
+  const { username, password } = req.body;
+  const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
+  const isValid = await passwordHash.compare(password, data.password);
   
   if (isValid) {
-    const token = jwt.sign({ username: reqBody.username }, config.jwt_secret, {
+    const token = jwt.sign({ username }, config.jwt_secret, {
       expiresIn: 3600, // expires in 1 hour
     });
   
