@@ -29,7 +29,7 @@ routes.post('/user/authenticate', async (req, res) => {
 })
 
 routes.get('/account/dashboard', middleware.checkToken, (req, res) => {
-  console.log(`All good! Looks like you've been authenticated!`);
+  res.send('Route loaded for /account/dashboard');
 });
 
 module.exports = routes;
