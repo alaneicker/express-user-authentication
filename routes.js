@@ -13,7 +13,6 @@ Promise.resolve()
   .then(() => db.migrate({ force: 'last' }))
   .catch((err) => console.error(err.stack));
 
-// Authenticate user
 routes.post('/user/authenticate', async (req, res) => {
   const { username, password } = req.body;
   const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
