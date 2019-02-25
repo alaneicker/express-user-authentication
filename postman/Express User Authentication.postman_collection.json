@@ -1,18 +1,18 @@
 {
 	"info": {
-		"_postman_id": "8cfe2c84-4a54-471d-99b0-11c567aaed8c",
+		"_postman_id": "6eb47710-d394-4212-ad2c-dd8ae65f2c76",
 		"name": "Express User Authentication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/accounts/dashboard",
+			"name": "/account/dashboard - with token",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NTExMjQxOTB9.PA7uOU23rA1vlQPYCy8xd0brF_mVCF74Pcy-kdbTxy4",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsYW5laWNrZXIiLCJpYXQiOjE1NTExMzczMjIsImV4cCI6MTU1MTE0MDkyMn0.AcPXHmCz4G01eXJK_DRsOjpzfKwwnkr6hMSsOPIJlqc",
 						"type": "text"
 					}
 				],
@@ -21,22 +21,23 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/accounts/dashboard",
+					"raw": "http://localhost:8080/account/dashboard",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"accounts",
+						"account",
 						"dashboard"
 					]
-				}
+				},
+				"description": "Authenticated route with JWT token in Authorization header"
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/user/authenticate",
+			"name": "/user/authenticate",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -63,6 +64,31 @@
 						"authenticate"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "/account/dashboard - no token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/account/dashboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account",
+						"dashboard"
+					]
+				},
+				"description": "Authenticated route with no JWT token in Authorization header"
 			},
 			"response": []
 		}
