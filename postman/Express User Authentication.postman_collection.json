@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "8cfe2c84-4a54-471d-99b0-11c567aaed8c",
+		"name": "Express User Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/accounts/dashboard",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NTExMjQxOTB9.PA7uOU23rA1vlQPYCy8xd0brF_mVCF74Pcy-kdbTxy4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/accounts/dashboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"accounts",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/user/authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"alaneicker\", \"password\": \"Qawsed44!\" }\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
