@@ -1,0 +1,21 @@
+{
+  "name": "express-user-authentication",
+  "version": "1.0.0",
+  "description": "A simple Node/Express user authentication API",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alan Eicker <alaneicker@gmail.com> (http://www.alaneicker.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "bcrypt-password-hash": "^1.0.0",
+    "bluebird": "^3.5.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "sqlite": "^3.0.2"
+  }
+}
