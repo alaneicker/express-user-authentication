@@ -11,20 +11,14 @@ let checkToken = (req, res, next) => {
   if (token) {
     jwt.verify(token, config.jwt_secret, (err, decoded) => {
       if (err) {
-        return res.json({
-          success: false,
-          message: 'Token is not valid'
-        });
+        return res.redirect('/login');
       } else {
         req.decoded = decoded;
         next();
       }
     });
   } else {
-    return res.json({
-      success: false,
-      message: 'Auth token is not supplied'
-    });
+    return res.redirect('/login');
   }
 };
 
