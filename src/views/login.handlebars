@@ -45,7 +45,10 @@
               password: document.querySelector('#password').value,
             })
             .then(res => {
-              if (res.data.auth === true) {
+              const { auth, token } = res.data;
+
+              if (auth === true) {
+                document.cookie = `userToken=${token}`;
                 location.href = '/account/dashboard';
               }
             })

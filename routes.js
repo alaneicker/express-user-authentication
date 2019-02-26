@@ -24,7 +24,7 @@ routes.post('/user/authenticate', async (req, res) => {
     const now = new Date();
     now.setTime(now.getTime() + 1 * 3600 * 1000);
 
-    res.cookie('userToken', `${token}`).status(200).send({ auth: true });
+    res.status(200).send({ auth: true, token });
   }
 })
 
