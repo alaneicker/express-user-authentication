@@ -20,8 +20,11 @@ routes.post('/user/authenticate', async (req, res) => {
     const token = jwt.sign({ username }, config.jwt_secret, {
       expiresIn: 3600, // expires in 1 hour
     });
-  
-    res.send({ auth: true, token });
+    
+    const now = new Date();
+    now.setTime(now.getTime() + 1 * 3600 * 1000);
+
+    res.cookie('userToken', `${token}`).status(200).send({ auth: true });
   }
 })
 
@@ -30,7 +33,7 @@ routes.get('/login', (req, res) => {
 });
 
 routes.get('/account/dashboard', middleware.checkToken, (req, res) => {
-  res.send('Route loaded for /account/dashboard');
+  res.render('dashboard');
 });
 
 module.exports = routes;
