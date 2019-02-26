@@ -12,16 +12,20 @@ Promise.resolve()
   .catch((err) => console.error(err.stack));
 
 routes.post('/user/authenticate', async (req, res) => {
-  const { username, password } = req.body;
-  const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
-  const isValid = await passwordHash.compare(password, data.password);
-  
-  if (isValid) {
-    const token = jwt.sign({ username }, config.jwt_secret, {
-      expiresIn: 3600, // expires in 1 hour
-    });
+  try {
+    const { username, password } = req.body;
+    const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
+    const isValid = await passwordHash.compare(password, data.password);
+    
+    if (isValid) {
+      const token = jwt.sign({ username }, config.jwt_secret, {
+        expiresIn: 3600, // expires in 1 hour
+      });
 
-    res.status(200).send({ auth: true, token });
+      res.status(200).send({ auth: true, token });
+    }
+  } catch(err) {
+    res.status(200).send({ auth: false });
   }
 })
 
