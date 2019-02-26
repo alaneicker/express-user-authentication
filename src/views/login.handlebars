@@ -20,7 +20,7 @@
             <input type="checkbox" class="form-check-input" id="remember">
             <label class="form-check-label text-dark" for="remember">Remember Me</label>
           </div>
-          <button type="submit" class="btn btn-dark">Submit</button>
+          <button id="login-btn" class="btn btn-dark" type="submit">Log In</button>
         </div>
       </form>
     </div>
@@ -31,13 +31,33 @@
 <script>
   (function() {
     'use strict';
+
     window.addEventListener('load', function() {
-      var forms = document.getElementsByClassName('needs-validation');
+      const forms = document.getElementsByClassName('needs-validation');
+
+      const setLoadingBtn = (id, text) => {
+        const btn = document.querySelector(id);
+        btn.setAttribute('disabled', true);
+        btn.innerHTML = `
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> ${text}
+        `;
+      };
+
+      const unsetLoadingButton = (id, text) => {
+        const btn = document.querySelector(id);
+        btn.removeAttribute('disabled');
+        btn.innerHTML = text;
+      }
+
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
+
+          setLoadingBtn('#login-btn', 'Logging In...');
+
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+            unsetLoadingButton('#login-btn', 'Log In');
           } else {
             event.preventDefault();
             axios.post('http://localhost:9000/user/authenticate', {
@@ -57,11 +77,15 @@
             })
             .catch(err => {
               console.log(err);
+              unsetLoadingButton('#login-btn', 'Log In');
             });
           }
           form.classList.add('was-validated');
+          
         }, false);
       });
+
     }, false);
+
   })();
 </script>
