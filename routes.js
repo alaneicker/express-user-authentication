@@ -6,8 +6,6 @@ const db = require('sqlite');
 const middleware = require('./middleware');
 const config = require('./config');
 
-//passwordHash.hash('Qawsed44!', {saltRounds: 14}).then(hash => console.log(hash));
-
 Promise.resolve()
   .then(() => db.open('./database.sqlite', { Promise }))
   .then(() => db.migrate({ force: 'last' }))
@@ -26,6 +24,10 @@ routes.post('/user/authenticate', async (req, res) => {
     res.send({ auth: true, token });
   }
 })
+
+routes.get('/login', (req, res) => {
+  res.render('login');
+});
 
 routes.get('/account/dashboard', middleware.checkToken, (req, res) => {
   res.send('Route loaded for /account/dashboard');
