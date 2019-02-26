@@ -20,9 +20,6 @@ routes.post('/user/authenticate', async (req, res) => {
     const token = jwt.sign({ username }, config.jwt_secret, {
       expiresIn: 3600, // expires in 1 hour
     });
-    
-    const now = new Date();
-    now.setTime(now.getTime() + 1 * 3600 * 1000);
 
     res.status(200).send({ auth: true, token });
   }

@@ -1,5 +1,6 @@
-let jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const config = require('./config.js');
+const cookieParser = require('cookie-parser')
 
 const parseCookies = (request) => {
   var list = {},

@@ -48,7 +48,10 @@
               const { auth, token } = res.data;
 
               if (auth === true) {
-                document.cookie = `userToken=${token}`;
+                const now = new Date();
+                now.setTime(now.getTime() + 1 * 3600 * 1000);
+
+                document.cookie = `userToken=${token}; expires=${now.toUTCString()} path=/;`;
                 location.href = '/account/dashboard';
               }
             })

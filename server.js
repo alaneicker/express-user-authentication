@@ -2,6 +2,7 @@ const express = require('express');
 const routes = require('./routes');
 const bodyParser = require('body-parser')
 const exphbs  = require('express-handlebars');
+const cookieParser = require('cookie-parser')
 const app = express();
 const port = process.env.PORT || 9000;
 
@@ -11,6 +12,7 @@ app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/src/views`);
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use('/', routes);
 
 app.listen(port, () => {
