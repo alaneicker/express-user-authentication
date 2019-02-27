@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const config = require('./config.js');
-const cookieParser = require('cookie-parser')
 
 const parseCookies = (request) => {
   var list = {},
@@ -14,7 +13,7 @@ const parseCookies = (request) => {
   return list;
 }
 
-const checkToken = (req, res, next) => {
+const validateToken = (req, res, next) => {
   const token = parseCookies(req).userToken;
 
   if (token) {
@@ -32,5 +31,5 @@ const checkToken = (req, res, next) => {
 };
 
 module.exports = {
-  checkToken: checkToken
+  validateToken: validateToken
 }

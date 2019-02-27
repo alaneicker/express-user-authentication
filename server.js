@@ -2,7 +2,7 @@ const express = require('express');
 const routes = require('./routes');
 const bodyParser = require('body-parser')
 const exphbs  = require('express-handlebars');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = process.env.PORT || 9000;
 

@@ -3,7 +3,7 @@ const passwordHash = require('bcrypt-password-hash')
 const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 const db = require('sqlite');
-const middleware = require('./middleware');
+const routeguard = require('./route-guard');
 const config = require('./config');
 
 Promise.resolve()
@@ -36,15 +36,15 @@ routes.get('/login', (req, res) => {
   res.render('login');
 });
 
-routes.get('/account/dashboard', middleware.checkToken, (req, res) => {
+routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
   res.render('dashboard');
 });
 
-routes.get('/account/add-user', middleware.checkToken, (req, res) => {
+routes.get('/account/add-user', routeguard.validateToken, (req, res) => {
   res.render('add-user');
 });
 
-routes.get('/account/my-profile', middleware.checkToken, (req, res) => {
+routes.get('/account/my-profile', routeguard.validateToken, (req, res) => {
   res.render('my-profile');
 });
 
