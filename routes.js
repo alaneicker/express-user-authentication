@@ -63,4 +63,8 @@ routes.get('/account/my-profile', routeguard.validateToken, (req, res) => {
   return res.render('my-profile');
 });
 
+routes.get('*', function(req, res){
+  res.status(404).render('page-not-found');
+});
+
 module.exports = routes;
