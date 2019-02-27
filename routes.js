@@ -1,15 +1,9 @@
 const routes = require('express').Router();
 const passwordHash = require('bcrypt-password-hash')
-const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 const db = require('sqlite');
 const routeguard = require('./route-guard');
 const config = require('./config');
-
-Promise.resolve()
-  .then(() => db.open('./database.sqlite', { Promise }))
-  .then(() => db.migrate({ force: 'last' }))
-  .catch((err) => console.error(err.stack));
 
 routes.post('/user/authenticate', async (req, res) => {
   const { username, password } = req.body;
