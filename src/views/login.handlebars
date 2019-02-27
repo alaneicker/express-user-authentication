@@ -71,7 +71,6 @@
               const { auth, token } = res.data;
 
               if (auth === true) {
-                console.log('COOKIE: ' + document.cookie);
                 location.href = '/account/dashboard';
               } else {
                 unsetLoadingButton('#login-btn', 'Log In');
