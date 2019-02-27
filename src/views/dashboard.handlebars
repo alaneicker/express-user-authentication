@@ -3,7 +3,7 @@
     <div class="card-title">
       <div class="row border-bottom">
         <div class="col-6">
-          <h4 class="pb-2 mb-4">Dashboard</h4>
+          <h4 class="mb-4">Dashboard</h4>
         </div>
         <div class="col-6">
           <ul class="nav justify-content-end">
@@ -31,7 +31,7 @@
 
   function deleteCookie(cname) {
     var d = new Date();
-    d.setTime(d.getTime() - (1000*60*60*24));
+    d.setTime(d.getTime() + (30 * 1000));
     var expires = `expires=${d.toGMTString()}`;
     document.cookie = `${cname}=; ${expires}; path=/;`;
   }

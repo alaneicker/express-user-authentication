@@ -27,6 +27,8 @@ routes.post('/user/authenticate', async (req, res) => {
 
       res.status(200).send({ auth: true, token });
     }
+
+    res.status(200).send({ auth: false });
   }
 })
 
