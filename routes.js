@@ -25,27 +25,27 @@ routes.post('/user/authenticate', async (req, res) => {
         expiresIn: 1800, // expires in 30 minutes
       });
 
-      res.status(200).send({ auth: true, token });
+      return res.status(200).send({ auth: true, token });
     }
 
-    res.status(200).send({ auth: false });
+    return res.status(200).send({ auth: false });
   }
 })
 
 routes.get('/login', (req, res) => {
-  res.render('login');
+  return res.render('login');
 });
 
 routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
-  res.render('dashboard');
+  return res.render('dashboard');
 });
 
 routes.get('/account/add-user', routeguard.validateToken, (req, res) => {
-  res.render('add-user');
+  return res.render('add-user');
 });
 
 routes.get('/account/my-profile', routeguard.validateToken, (req, res) => {
-  res.render('my-profile');
+  return res.render('my-profile');
 });
 
 module.exports = routes;
