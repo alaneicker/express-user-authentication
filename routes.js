@@ -51,26 +51,8 @@ routes.get('/login', (req, res) => {
   return res.render('login');
 });
 
-routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
-
-  const users = [
-    {
-      name: 'Alan Eicker',
-      email: 'alaneicker@gmail.com',
-      username: 'alaneicker'
-    },
-    {
-      name: 'John Doe',
-      email: 'jd@gmail.com',
-      username: 'johndoe'
-    },
-    {
-      name: 'Rober Smith',
-      email: 'robert.smith@yahoo.com',
-      username: 'robsmith'
-    },
-  ];
-
+routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
+  const users = await db.all('SELECT * FROM Users');
   const currentUser = req.decoded.username;
 
   return res.render('dashboard', { users, currentUser });

@@ -20,6 +20,24 @@ INSERT INTO Users (
   'alaneicker@gmail.com',
   'alaneicker',
   'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'John Doe',
+  'jdoe@gmail.com',
+  'jdoe',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'Fred Nelson',
+  'fnelson@yahoo.com',
+  'frednelson',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'Mary Smith',
+  'mary.smith@abccompany.com',
+  'msmith',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
 );
 
 --------------------------------------------------------------------------------
