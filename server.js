@@ -2,11 +2,15 @@ const express = require('express');
 const routes = require('./routes');
 const bodyParser = require('body-parser')
 const exphbs  = require('express-handlebars');
+const hbHelpers = require('./handlebars-helpers');
 const cookieParser = require('cookie-parser');
 const app = express();
 const port = process.env.PORT || 9000;
 
-app.engine('handlebars', exphbs({ defaultLayout: 'layout' }));
+app.engine('handlebars', exphbs({ 
+  defaultLayout: 'layout',
+  helpers: hbHelpers,
+}));
 
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/src/views`);

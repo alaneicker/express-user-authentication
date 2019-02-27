@@ -6,7 +6,7 @@
       </div>
       <div class="card-text row">
         <div class="col-md-8">
-          <h5 class="mb-2">Registered Users</h5>
+          <h5 class="mb-3">Registered Users</h5>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -19,7 +19,12 @@
             <tbody>
               {{#each users}}
                 <tr>
-                  <td>{{name}}</td>
+                  <td>
+                    {{name}} 
+                    {{#ifeq ../currentUser username}}
+                      <span class="badge badge-pill badge-dark">You</span>
+                    {{/ifeq}}
+                  </td>
                   <td>{{email}}</td>
                   <td>{{username}}</td>
                   <td>
@@ -32,7 +37,7 @@
           </table>
         </div>
         <div class="col-md-4">
-          <h5 class="mb-2">Add User</h5>
+          <h5 class="mb-3">Add User</h5>
           {{> user-form }}
         </div>
       </div> 

@@ -71,7 +71,9 @@ routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
     },
   ];
 
-  return res.render('dashboard', { users });
+  const currentUser = req.decoded.username;
+
+  return res.render('dashboard', { users, currentUser });
 });
 
 routes.get('*', function(req, res){

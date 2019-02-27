@@ -15,7 +15,7 @@ const parseCookies = (request) => {
 
 const validateToken = (req, res, next) => {
   const token = parseCookies(req).userToken;
-
+  
   if (token) {
     jwt.verify(token, config.jwt_secret, (err, decoded) => {
       if (err) {
