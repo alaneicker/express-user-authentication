@@ -38,6 +38,15 @@ routes.post('/user/authenticate', async (req, res) => {
   }
 })
 
+routes.get('/logout', (req, res) => {
+  const d = new Date();
+  d.setTime(d.getTime() + (30 * 1000));
+
+  return res
+    .header('Set-Cookie', `userToken=; expires=${d.toGMTString()}; path=/; HttpOnly`)
+    .redirect('/login');
+});
+
 routes.get('/login', (req, res) => {
   return res.render('login');
 });
