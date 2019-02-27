@@ -40,4 +40,12 @@ routes.get('/account/dashboard', middleware.checkToken, (req, res) => {
   res.render('dashboard');
 });
 
+routes.get('/account/add-user', middleware.checkToken, (req, res) => {
+  res.render('add-user');
+});
+
+routes.get('/account/my-profile', middleware.checkToken, (req, res) => {
+  res.render('my-profile');
+});
+
 module.exports = routes;

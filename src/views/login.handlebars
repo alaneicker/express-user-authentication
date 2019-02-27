@@ -52,8 +52,8 @@
         btn.innerHTML = text;
       }
 
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
+      var validation = Array.prototype.filter.call(forms, form => {
+        form.addEventListener('submit', event => {
 
           setLoadingBtn('#login-btn', 'Logging In...');
 

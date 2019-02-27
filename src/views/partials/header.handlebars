@@ -1,0 +1,40 @@
+<div class="row border-bottom">
+  <div class="col-6">
+    <h4 class="mb-4">{{{title}}}</h4>
+  </div>
+  <div class="col-6">
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link text-uppercase" href="/account/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-uppercase" href="/account/add-user">Add User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-uppercase" href="/account/my-profile">My Profile</a>
+      </li>
+      <li class="nav-item">
+        <a id="logout" class="nav-link text-uppercase" href="#">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const logout = document.querySelector('#logout');
+
+  function deleteCookie(cname) {
+    var d = new Date();
+    d.setTime(d.getTime() + (30 * 1000));
+    var expires = `expires=${d.toGMTString()}`;
+    document.cookie = `${cname}=; ${expires}; path=/;`;
+  }
+
+
+  logout.addEventListener('click', e => {
+    e.preventDefault();
+    deleteCookie('userToken');
+    console.log(document.cookie);
+    location.href = '/login';
+  })
+</script>
