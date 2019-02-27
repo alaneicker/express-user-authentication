@@ -6,9 +6,33 @@
       </div>
       <div class="card-text row">
         <div class="col-md-8">
-          
+          <h5 class="mb-2">Registered Users</h5>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each users}}
+                <tr>
+                  <td>{{name}}</td>
+                  <td>{{email}}</td>
+                  <td>{{username}}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-dark">Edit</button>
+                    <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
         </div>
         <div class="col-md-4">
+          <h5 class="mb-2">Add User</h5>
           {{> user-form }}
         </div>
       </div> 

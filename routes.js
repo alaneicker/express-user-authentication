@@ -52,7 +52,26 @@ routes.get('/login', (req, res) => {
 });
 
 routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
-  return res.render('dashboard');
+
+  const users = [
+    {
+      name: 'Alan Eicker',
+      email: 'alaneicker@gmail.com',
+      username: 'alaneicker'
+    },
+    {
+      name: 'John Doe',
+      email: 'jd@gmail.com',
+      username: 'johndoe'
+    },
+    {
+      name: 'Rober Smith',
+      email: 'robert.smith@yahoo.com',
+      username: 'robsmith'
+    },
+  ];
+
+  return res.render('dashboard', { users });
 });
 
 routes.get('*', function(req, res){
