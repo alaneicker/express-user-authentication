@@ -55,14 +55,6 @@ routes.get('/account/dashboard', routeguard.validateToken, (req, res) => {
   return res.render('dashboard');
 });
 
-routes.get('/account/add-user', routeguard.validateToken, (req, res) => {
-  return res.render('add-user');
-});
-
-routes.get('/account/my-profile', routeguard.validateToken, (req, res) => {
-  return res.render('my-profile');
-});
-
 routes.get('*', function(req, res){
   res.status(404).render('page-not-found');
 });
