@@ -71,10 +71,7 @@
               const { auth, token } = res.data;
 
               if (auth === true) {
-                const now = new Date();
-                now.setTime(now.getTime() + 1 * 3600 * 1000);
-
-                document.cookie = `userToken=${token}; expires=${now.toUTCString()} path=/;`;
+                console.log('COOKIE: ' + document.cookie);
                 location.href = '/account/dashboard';
               } else {
                 unsetLoadingButton('#login-btn', 'Log In');

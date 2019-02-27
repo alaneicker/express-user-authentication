@@ -25,7 +25,13 @@ routes.post('/user/authenticate', async (req, res) => {
         expiresIn: 1800, // expires in 30 minutes
       });
 
-      return res.status(200).send({ auth: true, token });
+      const now = new Date();
+      now.setTime(now.getTime() + 1 * 3600 * 1000);
+
+      return res
+        .header('Set-Cookie', `userToken=${token}; expires=${now.toUTCString()}; path=/; HttpOnly`)
+        .status(200)
+        .send({ auth: true });
     }
 
     return res.status(200).send({ auth: false });
