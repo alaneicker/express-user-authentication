@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const exphbs  = require('express-handlebars');
 const hbHelpers = require('./handlebars-helpers');
 const cookieParser = require('cookie-parser');
-const app = express();
 const port = process.env.PORT || 9000;
+const app = express();
 
 app.engine('handlebars', exphbs({ 
   defaultLayout: 'layout',
