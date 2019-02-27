@@ -20,7 +20,7 @@
               <tbody>
                 {{#each users}}
                   <tr>
-                    <td>
+                    <td class="text-nowrap">
                       {{name}} 
                       {{#ifeq ../currentUser username}}
                         <span class="badge badge-pill badge-dark">You</span>
@@ -29,12 +29,12 @@
                     <td>{{email}}</td>
                     <td>{{username}}</td>
                     <td>
-                      <ul class="list-inline">
+                      <ul class="list-inline text-nowrap">
                         <li class="list-inline-item">
-                          <a href="">Edit</a>
+                          <button type="button" class="btn btn-sm btn-dark">Edit</button>
                         </li>
                         <li class="list-inline-item">
-                          <a href="">Delete</a>
+                          <button type="button" class="btn btn-sm btn-danger">Delete</button>
                         </li>
                       </ul>
                     </td>

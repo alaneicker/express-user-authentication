@@ -35,7 +35,7 @@ INSERT INTO Users (
 ),
 (
   'Mary Smith',
-  'mary.smith@abccompany.com',
+  'mary.smith@gmail.com',
   'msmith',
   'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
 );
