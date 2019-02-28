@@ -38,6 +38,18 @@ INSERT INTO Users (
   'mary.smith@gmail.com',
   'msmith',
   'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'Bob Newhart',
+  'bob.newhart@gmail.com',
+  'bobnewhart',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'Paul Monson',
+  'p.mpnson@gmail.com',
+  'paulmonson',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
 );
 
 --------------------------------------------------------------------------------
