@@ -5,6 +5,8 @@ const db = require('sqlite');
 const routeguard = require('./route-guard');
 const config = require('./config');
 
+const tokenSignature = require('./server').tokenSignature;
+console.log(tokenSignature); 
 routes.post('/user/authenticate', async (req, res) => {
   const { username, password } = req.body;
   const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
@@ -15,7 +17,7 @@ routes.post('/user/authenticate', async (req, res) => {
     const isValid = await passwordHash.compare(password, data.password);
     
     if (isValid) {
-      const token = jwt.sign({ username }, config.jwt_secret, {
+      const token = jwt.sign({ username }, config.jwtSignature, {
         expiresIn: 1800, // expires in 30 minutes
       });
 
