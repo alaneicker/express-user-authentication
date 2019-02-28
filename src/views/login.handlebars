@@ -1,7 +1,7 @@
 <div class="row justify-content-center h-100">
   <div class="col-6 align-self-center">
     <div class="card">
-      <form class="card-body text-center needs-validation" novalidate>
+      <form id="login-form" class="card-body text-center needs-validation" novalidate>
         <div class="card-title">
           <h4 class="border-bottom pb-2 mb-4">Account Login</h4>
         </div>
@@ -32,74 +32,45 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script>
-  (function() {
-    'use strict';
+  const storedUsername = localStorage.getItem('storedUsername');
 
-    window.addEventListener('load', function() {
-      const forms = document.getElementsByClassName('needs-validation');
-      const storedUsername = localStorage.getItem('storedUsername');
+  if (storedUsername) {
+    document.querySelector('#username').value = storedUsername;
+  }
 
-      if (storedUsername) {
-        document.querySelector('#username').value = storedUsername;
+  document.querySelector('#login-form').addEventListener('submit', e => {
+    const form = e.target;
+    const username = document.querySelector('#username').value;
+    const password = document.querySelector('#password').value;
+    const remember = document.querySelector('#remember');
+
+    e.preventDefault();
+
+    if (form.checkValidity() === true) {
+
+      if (remember.checked === true) {
+        localStorage.setItem('storedUsername', username);
       }
 
-      const setLoadingBtn = (id, text) => {
-        const btn = document.querySelector(id);
-        btn.setAttribute('disabled', true);
-        btn.innerHTML = `
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> ${text}
-        `;
-      };
+      setLoadingBtn('#login-btn', 'Logging In...');
 
-      const unsetLoadingButton = (id, text) => {
-        const btn = document.querySelector(id);
-        btn.removeAttribute('disabled');
-        btn.innerHTML = text;
-      }
+      axios.post('http://localhost:9000/user/authenticate', { username, password })
+      .then(res => {
+        const { auth, token } = res.data;
 
-      var validation = Array.prototype.filter.call(forms, form => {
-        form.addEventListener('submit', event => {
-
-          setLoadingBtn('#login-btn', 'Logging In...');
-
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-            unsetLoadingButton('#login-btn', 'Log In');
-          } else {
-            event.preventDefault();
-
-            const username = document.querySelector('#username').value;
-            const password = document.querySelector('#password').value;
-            const remember = document.querySelector('#remember');
-
-            if (remember.checked === true) {
-              localStorage.setItem('storedUsername', username);
-            }
-
-            axios.post('http://localhost:9000/user/authenticate', { username, password })
-            .then(res => {
-              const { auth, token } = res.data;
-
-              if (auth === true) {
-                location.href = '/account/dashboard';
-              } else {
-                unsetLoadingButton('#login-btn', 'Log In');
-                document.querySelector('#auth-error').classList.remove('d-none');
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              unsetLoadingButton('#login-btn', 'Log In');
-            });
-          }
-
-          form.classList.add('was-validated');
-          
-        }, false);
+        if (auth === true) {
+          location.href = '/account/dashboard';
+        } else {
+          unsetLoadingButton('#login-btn', 'Log In');
+          document.querySelector('#auth-error').classList.remove('d-none');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        unsetLoadingButton('#login-btn', 'Log In');
       });
+    }
 
-    }, false);
-
-  })();
+    form.classList.add('was-validated');
+  });
 </script>

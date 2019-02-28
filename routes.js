@@ -32,6 +32,10 @@ routes.post('/user/authenticate', async (req, res) => {
   }
 })
 
+routes.get('/', (req, res) => {
+  return res.render('login');
+});
+
 routes.get('/logout', (req, res) => {
   const d = new Date();
   d.setTime(d.getTime() + (30 * 1000));
