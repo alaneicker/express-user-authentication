@@ -5,47 +5,12 @@
 	<title>Express User Authentication</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css">
-	<style>
-		html, 
-		body {
-			height: 100%;
-		}
-		ul {
-			margin: 0;
-		}
-		.was-validated .form-control:invalid {
-			border: 1px solid #d9534f;
-		}
-		.nav > .nav-item {
-			margin-right: 0;
-		}
-		.password-input {
-			position: relative;
-		}
-		.btn-show-password {
-			border: 0;
-			background: none;
-		}
-	</style>
+	<link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="bg-dark">
 	<div class="container h-100">
 		{{{body}}}
 	</div>
-	<script>
-		const setLoadingBtn = (id, text) => {
-			const btn = document.querySelector(id);
-			btn.setAttribute('disabled', true);
-			btn.innerHTML = `
-				<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> ${text}
-			`;
-		};
-
-		const unsetLoadingButton = (id, text) => {
-			const btn = document.querySelector(id);
-			btn.removeAttribute('disabled');
-			btn.innerHTML = text;
-		}
-	</script>
+	<script src="/js/app.js"></script>
 </body>
 </html>

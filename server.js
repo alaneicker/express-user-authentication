@@ -21,6 +21,7 @@ app.engine('handlebars', exphbs({
 
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/src/views`);
+app.use(express.static(`${__dirname}/src/static`));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
