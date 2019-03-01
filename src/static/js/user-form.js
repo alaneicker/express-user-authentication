@@ -19,3 +19,21 @@ document.querySelector('#user-form').addEventListener('submit', e => {
 
   form.classList.add('was-validated');
 });
+
+// Edit / Delete User
+const actionBtn = document.querySelectorAll('.action-btn');
+
+Array.prototype.forEach.call(actionBtn, btn => {
+  btn.addEventListener('click', e => {
+    const userId = e.target.getAttribute('data-user-id');
+    const action = e.target.getAttribute('data-action');
+
+    if (action === 'edit') {
+      // Show edit user modal
+    }
+
+    if (action === 'delete') {
+      // Show delete user modal
+    }
+  });
+})

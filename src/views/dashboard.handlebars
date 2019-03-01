@@ -1,54 +1,22 @@
-<div class="pt-4 pb-4">
-  <div class="card">
-    <div class="card-body">
-      <div class="card-title">
-        {{> header title='Dashboard'}}
-      </div>
-      <div class="card-text row">
-        <div class="col-md-8">
-          <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Username</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each users}}
-                  <tr>
-                    <td class="text-nowrap">
-                      {{name}} 
-                      {{#ifeq ../currentUser username}}
-                        <span class="badge badge-pill badge-dark">You</span>
-                      {{/ifeq}}
-                    </td>
-                    <td>{{email}}</td>
-                    <td>{{username}}</td>
-                    <td>
-                      <ul class="list-inline text-nowrap">
-                        <li class="list-inline-item">
-                          <button type="button" class="btn btn-sm btn-dark">Edit</button>
-                        </li>
-                        <li class="list-inline-item">
-                          <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                        </li>
-                      </ul>
-                    </td>
-                  </tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <h5 class="mb-3 text-center text-md-left">Add User</h5>
-          {{> user-form }}
-        </div>
-      </div> 
+<div class="card h-100">
+  <div class="card-body">
+    <div class="card-title">
+      {{> header title='Dashboard'}}
     </div>
+    <div class="card-text row">
+      <div class="col-md-8">
+        <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
+        {{> user-table }}
+      </div>
+      <div class="col-md-4">
+        <h5 class="mb-3 text-center text-md-left">Add User</h5>
+        {{> user-form }}
+      </div>
+    </div> 
   </div>
 </div>
+
+{{#contentFor "scripts"}}
+<script src="/js/axios.min.js"></script>
+<script src="/js/user-form.js"></script>
+{{/contentFor}}

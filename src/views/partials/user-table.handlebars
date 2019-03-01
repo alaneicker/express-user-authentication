@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Username</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td class="text-nowrap">
+            {{name}} 
+            {{#ifeq ../currentUser username}}
+              <span class="badge badge-pill badge-dark">You</span>
+            {{/ifeq}}
+          </td>
+          <td>{{email}}</td>
+          <td>{{username}}</td>
+          <td>
+            <ul class="list-inline text-nowrap">
+              <li class="list-inline-item">
+                <button type="button" class="btn btn-sm btn-dark action-btn" data-action="edit" data-user-id="{{id}}">Edit</button>
+              </li>
+              <li class="list-inline-item">
+                <button type="button" class="btn btn-sm btn-danger action-btn" data-action="delete" data-user-id="{{id}}">Delete</button>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
