@@ -50,6 +50,12 @@ INSERT INTO Users (
   'p.mpnson@gmail.com',
   'paulmonson',
   'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
+),
+(
+  'John Jacoby',
+  'john.jacoby@yahoo.com',
+  'johnj',
+  'bcrypt$2b$14$.5OgqP0JeLVbd/6qQ6O4S.SQyTjQkG/LSBFH3MjLR6G8mnGo1vMFG'
 );
 
 --------------------------------------------------------------------------------
