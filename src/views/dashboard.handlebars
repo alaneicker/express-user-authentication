@@ -3,20 +3,9 @@
     <div class="card-title">
       {{> header title='Dashboard'}}
     </div>
-    <div class="card-text row">
-      <div class="col-md-8">
-        <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
-        {{> user-table }}
-      </div>
-      <div class="col-md-4">
-        <h5 class="mb-3 text-center text-md-left">Add User</h5>
-        {{> user-form }}
-      </div>
+    <div class="card-text">
+      <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
+      {{> user-table }}
     </div> 
   </div>
 </div>
-
-{{#contentFor "scripts"}}
-<script src="/js/axios.min.js"></script>
-<script src="/js/user-form.js"></script>
-{{/contentFor}}

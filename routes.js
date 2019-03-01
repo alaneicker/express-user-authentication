@@ -58,6 +58,15 @@ routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
   return res.render('dashboard', { users, currentUser });
 });
 
+routes.get('/user/edit/:id?', async (req, res) => {
+  const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
+  return res.render('user-form', { 
+    user, 
+    updateUser: true, 
+    pageTitle: 'Edit User' 
+  });
+});
+
 routes.get('*', function(req, res){
   res.status(404).render('page-not-found');
 });

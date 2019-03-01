@@ -1,0 +1,67 @@
+<div class="card h-100">
+  <div class="card-body">
+    <div class="card-title">
+      {{> header title=pageTitle}}
+    </div>
+    <div class="card-text">
+      <div class="row">
+        <div class="col-md-6">
+          <form id="user-form" class="needs-validation" data-form="{{#if updateUser}}update-user{{else}}add-user{{/if}}" novalidate>
+            <div id="add-user-error" class="alert alert-danger d-none" role="alert">
+              Username already exists.
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold text-dark" for="name">Name</label>
+              <input id="name" class="form-control" type="text" autocomplete="off" value="{{user.name}}" required />
+              <div class="invalid-feedback">Please provide a name</div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold text-dark" for="name">Email</label>
+              <input id="email" class="form-control" type="email" autocomplete="off" value="{{user.email}}" required />
+              <div class="invalid-feedback">Please provide a valid email</div>
+            </div>
+            <div class="form-group">
+              <label class="font-weight-bold text-dark" for="username">Username</label>
+              <input id="username" class="form-control" type="text" autocomplete="off" value="{{{user.username}}}" required />
+              <div class="invalid-feedback">Please provide a username</div>
+            </div>
+            {{#if updateUser}}
+              <div class="form-group">
+                <label class="font-weight-bold text-dark" for="current-password">Current Password</label>
+                <input id="current-password" class="form-control" type="password" autocomplete="off" required />
+                <div class="invalid-feedback">Please provide a password</div>
+              </div>
+            {{/if}}
+            <div class="form-group">
+              <label class="font-weight-bold text-dark" for="password">
+                {{#if updateUser}}New Password{{else}}Password{{/if}}
+                <button id="btn-show-password" class="btn-show-password" type="button" title="toggle password visibility">
+                  <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    width="20px" height="20px" viewBox="0 0 98.48 98.48" style="enable-background:new 0 0 98.48 98.48;" xml:space="preserve">
+                    <path d="M97.204,45.788c-0.865-1.02-21.537-24.945-47.963-24.945c-26.427,0-47.098,23.925-47.965,24.946
+                      c-1.701,2-1.701,4.902,0.001,6.904c0.866,1.02,21.537,24.944,47.964,24.944c26.426,0,47.098-23.926,47.964-24.946
+                      C98.906,50.691,98.906,47.789,97.204,45.788z M57.313,35.215c1.777-0.97,4.255,0.143,5.534,2.485
+                      c1.279,2.343,0.875,5.029-0.902,5.999c-1.776,0.971-4.255-0.143-5.535-2.485C55.132,38.871,55.535,36.185,57.313,35.215z
+                      M49.241,68.969c-18.46,0-33.995-14.177-39.372-19.729c3.631-3.75,11.898-11.429,22.567-16.021
+                      c-2.081,3.166-3.301,6.949-3.301,11.021c0,11.104,9.001,20.105,20.105,20.105s20.106-9.001,20.106-20.105
+                      c0-4.072-1.219-7.855-3.3-11.021C76.715,37.812,84.981,45.49,88.612,49.24C83.235,54.795,67.7,68.969,49.241,68.969z"/>
+                  </svg>
+                </button>
+              </label>
+              <input id="password" class="form-control" type="password" autocomplete="off" required />
+              <div class="invalid-feedback">Please provide a password</div>
+            </div>
+            <button id="submit-btn" class="btn btn-info" type="submit">
+              {{#if updateUser}}Update User{{else}}Save User{{/if}}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+{{#contentFor "scripts"}}
+<script src="/js/axios.min.js"></script>
+<script src="/js/user-form.js"></script>
+{{/contentFor}}

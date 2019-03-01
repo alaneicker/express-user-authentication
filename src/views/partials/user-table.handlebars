@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Username</th>
-        <th scope="col">Actions</th>
+        <th scope="col" class="text-center">Email</th>
+        <th scope="col" class="text-center">Username</th>
+        <th scope="col" class="text-right">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -17,15 +17,15 @@
               <span class="badge badge-pill badge-dark">You</span>
             {{/ifeq}}
           </td>
-          <td>{{email}}</td>
-          <td>{{username}}</td>
-          <td>
+          <td class="text-center">{{email}}</td>
+          <td class="text-center">{{username}}</td>
+          <td class="text-right">
             <ul class="list-inline text-nowrap">
               <li class="list-inline-item">
-                <button type="button" class="btn btn-sm btn-dark action-btn" data-action="edit" data-user-id="{{id}}">Edit</button>
+                <a href="/user/edit/{{id}}" class="btn btn-sm btn-dark">Edit</a>
               </li>
               <li class="list-inline-item">
-                <button type="button" class="btn btn-sm btn-danger action-btn" data-action="delete" data-user-id="{{id}}">Delete</button>
+                <button type="button" class="btn btn-sm btn-danger delete-btn" data-action="delete" data-user-id="{{id}}">Delete</button>
               </li>
             </ul>
           </td>
