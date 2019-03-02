@@ -58,7 +58,11 @@ routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
   return res.render('dashboard', { users, currentUser });
 });
 
-routes.get('/user/edit/:id?', async (req, res) => {
+routes.get('/user/add', routeguard.validateToken, async (req, res) => {
+  return res.render('user-form', { pageTitle: 'Add User'  });
+});
+
+routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
   const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
   return res.render('user-form', { 
     user, 

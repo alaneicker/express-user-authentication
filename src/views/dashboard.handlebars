@@ -4,7 +4,16 @@
       {{> header title='Dashboard'}}
     </div>
     <div class="card-text">
-      <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="mb-3 text-center text-md-left">Registered Users</h5>
+        </div>
+        <div class="col-md-6">
+          <div class="text-right">
+            <a href="/user/add" class="text-uppercase">+ Add User</a>
+          </div>
+        </div>
+      </div>
       {{> user-table }}
     </div> 
   </div>
