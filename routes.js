@@ -5,8 +5,6 @@ const db = require('sqlite');
 const routeguard = require('./route-guard');
 const config = require('./config');
 
-const tokenSignature = require('./server').tokenSignature;
-console.log(tokenSignature); 
 routes.post('/user/authenticate', async (req, res) => {
   const { username, password } = req.body;
   const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
@@ -64,7 +62,7 @@ routes.get('/user/add', routeguard.validateToken, async (req, res) => {
 
 routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
   const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
-  
+
   return res.render('user-form', { 
     user, 
     updateUser: true, 
