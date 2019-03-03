@@ -92,6 +92,14 @@ routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => 
   return res.send(response.stmt);
 });
 
+// UPDATE USER
+routes.put('/user/update', routeguard.validateToken, async (req, res) => {
+  const query = '';
+  const response = await db.run(query, Object.values(req.body));
+  
+  return res.send(response.stmt);
+});
+
 // 404 ROUTE
 routes.get('*', function(req, res){
   res.status(404).render('page-not-found');
