@@ -32,23 +32,17 @@ routes.post('/user/authenticate', async (req, res) => {
   }
 })
 
+// INDEX ROUTE
 routes.get('/', (req, res) => {
   return res.render('login');
 });
 
-routes.get('/logout', (req, res) => {
-  const d = new Date();
-  d.setTime(d.getTime() + (30 * 1000));
-
-  return res
-    .header('Set-Cookie', `userToken=; expires=${d.toGMTString()}; path=/; HttpOnly`)
-    .redirect('/login');
-});
-
+// LOGIN ROUTE
 routes.get('/login', (req, res) => {
   return res.render('login');
 });
 
+// DASHBOARD ROUTE
 routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
   const users = await db.all('SELECT * FROM Users');
   const currentUser = req.decoded.username;
@@ -56,24 +50,12 @@ routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
   return res.render('dashboard', { users, currentUser });
 });
 
+// ADD USER ROUTE
 routes.get('/user/add', routeguard.validateToken, async (req, res) => {
   return res.render('user-form', { pageTitle: 'Add User'  });
 });
 
-routes.post('/user/create', routeguard.validateToken, async (req, res) => {
-  const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
-  const response = await db.run(query, Object.values(req.body));
-  
-  return res.send(response.stmt);
-});
-
-routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => {
-  const query = 'DELETE FROM Users WHERE id = ?';
-  const response = await db.run(query, req.params.id);
-  
-  return res.send(response.stmt);
-});
-
+// EDIT USER ROUTE
 routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
   const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
 
@@ -84,6 +66,33 @@ routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
   });
 });
 
+// LOG OUT USER
+routes.get('/logout', (req, res) => {
+  const d = new Date();
+  d.setTime(d.getTime() + (30 * 1000));
+
+  return res
+    .header('Set-Cookie', `userToken=; expires=${d.toGMTString()}; path=/; HttpOnly`)
+    .redirect('/login');
+});
+
+// CREATE USER
+routes.post('/user/create', routeguard.validateToken, async (req, res) => {
+  const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
+  const response = await db.run(query, Object.values(req.body));
+  
+  return res.send(response.stmt);
+});
+
+// DELETE USER
+routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => {
+  const query = 'DELETE FROM Users WHERE id = ?';
+  const response = await db.run(query, req.params.id);
+  
+  return res.send(response.stmt);
+});
+
+// 404 ROUTE
 routes.get('*', function(req, res){
   res.status(404).render('page-not-found');
 });
