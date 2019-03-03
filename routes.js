@@ -87,7 +87,7 @@ routes.post('/user/authenticate', async (req, res) => {
 })
 
 // Create user
-routes.post('/user/create', routeguard.validateToken, async (req, res) => {
+routes.post('/user/create', async (req, res) => {
   const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
   const response = await db.run(query, Object.values(req.body));
   
@@ -95,7 +95,7 @@ routes.post('/user/create', routeguard.validateToken, async (req, res) => {
 });
 
 // Delete user
-routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => {
+routes.delete('/user/delete/:id', async (req, res) => {
   const query = 'DELETE FROM Users WHERE id = ?';
   const response = await db.run(query, req.params.id);
   
@@ -103,11 +103,20 @@ routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => 
 });
 
 // Update user
-routes.put('/user/update/:id', routeguard.validateToken, async (req, res) => {
-  const query = '';
-  const response = await db.run(query, Object.values(req.body));
+routes.put('/user/update/:id', async (req, res) => {
+  if (req.body.password === '') {
+    delete req.body.password;
+  }
+
+  const query = `
+    UPDATE Users 
+    SET ${Object.keys(req.body).map(field => `${field} = ?`).join(', ')} 
+    WHERE ID = ?
+  `;
   
-  return res.send(response.stmt);
+  // const response = await db.run(query, Object.values(req.body).concat(req.params.id));
+  
+  return res.send(response);
 });
 
 // ERRORS
