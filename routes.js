@@ -60,9 +60,16 @@ routes.get('/user/add', routeguard.validateToken, async (req, res) => {
   return res.render('user-form', { pageTitle: 'Add User'  });
 });
 
-routes.post('/user/create', async (req, res) => {
+routes.post('/user/create', routeguard.validateToken, async (req, res) => {
   const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
   const response = await db.run(query, Object.values(req.body));
+  
+  return res.send(response.stmt);
+});
+
+routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => {
+  const query = 'DELETE FROM Users WHERE id = ?';
+  const response = await db.run(query, req.params.id);
   
   return res.send(response.stmt);
 });
