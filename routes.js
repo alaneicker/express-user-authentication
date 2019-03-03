@@ -5,6 +5,60 @@ const db = require('sqlite');
 const routeguard = require('./route-guard');
 const config = require('./config');
 
+// UNPROTECTED ROUTES
+// ---------------------------------------------
+
+// Index
+routes.get('/', (req, res) => {
+  return res.render('login');
+});
+
+// Login
+routes.get('/login', (req, res) => {
+  return res.render('login');
+});
+
+// Logout
+routes.get('/logout', (req, res) => {
+  const d = new Date();
+  d.setTime(d.getTime() + (30 * 1000));
+
+  return res
+    .header('Set-Cookie', `userToken=; expires=${d.toGMTString()}; path=/; HttpOnly`)
+    .redirect('/login');
+});
+
+// PROTECTED ROUTES
+// ---------------------------------------------
+
+// Dashboard
+routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
+  const users = await db.all('SELECT * FROM Users');
+  const currentUser = req.decoded.username;
+
+  return res.render('dashboard', { users, currentUser });
+});
+
+// Add user
+routes.get('/user/add', routeguard.validateToken, async (req, res) => {
+  return res.render('user-form', { pageTitle: 'Add User'  });
+});
+
+// Edit user
+routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
+  const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
+
+  return res.render('user-form', { 
+    user, 
+    updateUser: true, 
+    pageTitle: 'Edit User' 
+  });
+});
+
+// API ENDPOINTS
+// ---------------------------------------------
+
+// Authenticate user
 routes.post('/user/authenticate', async (req, res) => {
   const { username, password } = req.body;
   const data = await db.get('SELECT password FROM Users WHERE username = ?', username);
@@ -32,51 +86,7 @@ routes.post('/user/authenticate', async (req, res) => {
   }
 })
 
-// INDEX ROUTE
-routes.get('/', (req, res) => {
-  return res.render('login');
-});
-
-// LOGIN ROUTE
-routes.get('/login', (req, res) => {
-  return res.render('login');
-});
-
-// DASHBOARD ROUTE
-routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
-  const users = await db.all('SELECT * FROM Users');
-  const currentUser = req.decoded.username;
-
-  return res.render('dashboard', { users, currentUser });
-});
-
-// ADD USER ROUTE
-routes.get('/user/add', routeguard.validateToken, async (req, res) => {
-  return res.render('user-form', { pageTitle: 'Add User'  });
-});
-
-// EDIT USER ROUTE
-routes.get('/user/edit/:id?', routeguard.validateToken, async (req, res) => {
-  const user = await db.get('SELECT * FROM Users WHERE id = ?', req.params.id);
-
-  return res.render('user-form', { 
-    user, 
-    updateUser: true, 
-    pageTitle: 'Edit User' 
-  });
-});
-
-// LOG OUT USER
-routes.get('/logout', (req, res) => {
-  const d = new Date();
-  d.setTime(d.getTime() + (30 * 1000));
-
-  return res
-    .header('Set-Cookie', `userToken=; expires=${d.toGMTString()}; path=/; HttpOnly`)
-    .redirect('/login');
-});
-
-// CREATE USER
+// Create user
 routes.post('/user/create', routeguard.validateToken, async (req, res) => {
   const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
   const response = await db.run(query, Object.values(req.body));
@@ -84,7 +94,7 @@ routes.post('/user/create', routeguard.validateToken, async (req, res) => {
   return res.send(response.stmt);
 });
 
-// DELETE USER
+// Delete user
 routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => {
   const query = 'DELETE FROM Users WHERE id = ?';
   const response = await db.run(query, req.params.id);
@@ -92,15 +102,18 @@ routes.delete('/user/delete/:id', routeguard.validateToken, async (req, res) => 
   return res.send(response.stmt);
 });
 
-// UPDATE USER
-routes.put('/user/update', routeguard.validateToken, async (req, res) => {
+// Update user
+routes.put('/user/update/:id', routeguard.validateToken, async (req, res) => {
   const query = '';
   const response = await db.run(query, Object.values(req.body));
   
   return res.send(response.stmt);
 });
 
-// 404 ROUTE
+// ERRORS
+// ---------------------------------------------
+
+// 404
 routes.get('*', function(req, res){
   res.status(404).render('page-not-found');
 });
