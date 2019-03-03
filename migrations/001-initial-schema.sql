@@ -14,7 +14,7 @@ INSERT INTO Users (
   name,
   email,
   username, 
-  PASSWORD
+  password
 ) VALUES (
   'Alan Eicker',
   'alaneicker@gmail.com',
