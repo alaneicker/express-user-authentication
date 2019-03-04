@@ -89,9 +89,10 @@ routes.post('/user/authenticate', async (req, res) => {
 // Create user
 routes.post('/user/create', async (req, res) => {
   const query = 'INSERT INTO Users (name, email, username, password) VALUES (?,?,?,?)';
-  const response = await db.run(query, Object.values(req.body));
+  const reqBody = Object.assign(req.body, { password: await passwordHash.hash(req.body.password, {saltRounds: 14}) });
+  const response = await db.run(query, Object.values(reqBody));
   
-  return res.send(response.stmt);
+  return res.send(response);
 });
 
 // Delete user
@@ -104,17 +105,21 @@ routes.delete('/user/delete/:id', async (req, res) => {
 
 // Update user
 routes.put('/user/update/:id', async (req, res) => {
-  if (req.body.password === '') {
-    delete req.body.password;
+  let reqBody = req.body;
+
+  if (reqBody.password === '') {
+    delete reqBody.password;
+  } else {
+    reqBody = Object.assign(reqBody, { password: await passwordHash.hash(reqBody.password, {saltRounds: 14}) });
   }
 
   const query = `
     UPDATE Users 
-    SET ${Object.keys(req.body).map(field => `${field} = ?`).join(', ')} 
+    SET ${Object.keys(reqBody).map(field => `${field} = ?`).join(', ')} 
     WHERE ID = ?
   `;
   
-  // const response = await db.run(query, Object.values(req.body).concat(req.params.id));
+  const response = await db.run(query, Object.values(reqBody).concat(req.params.id));
   
   return res.send(response);
 });

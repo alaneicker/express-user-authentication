@@ -18,7 +18,7 @@ document.querySelector('#login-form').addEventListener('submit', e => {
       localStorage.setItem('storedUsername', username);
     }
 
-    setLoadingBtn('#login-btn', 'Logging In...');
+    setLoadingBtn('#login-btn');
 
     axios.post('http://localhost:9000/user/authenticate', { username, password })
     .then(res => {
@@ -27,13 +27,13 @@ document.querySelector('#login-form').addEventListener('submit', e => {
       if (auth === true) {
         location.href = '/account/dashboard';
       } else {
-        unsetLoadingButton('#login-btn', 'Log In');
+        unsetLoadingButton('#login-btn');
         document.querySelector('#auth-error').classList.remove('d-none');
       }
     })
     .catch(err => {
       console.log(err);
-      unsetLoadingButton('#login-btn', 'Log In');
+      unsetLoadingButton('#login-btn');
     });
   }
 

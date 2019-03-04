@@ -1,3 +1,12 @@
+// form to json
+const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+  if (element.name) {
+    data[element.name] = element.value;
+  }
+
+  return data;
+}, {});
+
 // Toggle password visibility
 document.querySelector('#btn-show-password').addEventListener('click', e => {
   const passwordInput = document.querySelector('#password');
@@ -8,21 +17,31 @@ document.querySelector('#btn-show-password').addEventListener('click', e => {
 document.querySelector('#user-form').addEventListener('submit', e => {
   const form = e.target;
   const formType = e.target.getAttribute('data-form');
-  
+  const formData = formToJSON(form.elements);
+  const userId = document.querySelector('#user-id').value;
+  const method = formType === 'add' ? 'post' : 'put';
+  const url = formType === 'add'
+      ? `http://localhost:9000/user/create`
+      : `http://localhost:9000/user/update/${userId}`;
+
   e.preventDefault();
 
   if (form.checkValidity() === true) {
-    if (formType === 'add-user' ) {
-      setLoadingBtn('#submit-btn', 'Adding user...');
-    } else {
-      setLoadingBtn('#submit-btn', 'Updating user...');
-    }
+    setLoadingBtn('#submit-btn');
+
+    axios[method](url, formData)
+      .then(res => {
+        if (res.data.stmt.changes > 0) {
+          unsetLoadingButton('#submit-btn');
+          // show flash message
+        }
+      });    
   }
 
   form.classList.add('was-validated');
 });
 
-// Edit / Delete User
+// Delete User
 Array.prototype.forEach.call(document.querySelectorAll('.delete-btn'), btn => {
   btn.addEventListener('click', e => {
     const userId = e.target.getAttribute('data-user-id');
