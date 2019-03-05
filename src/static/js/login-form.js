@@ -4,7 +4,10 @@ class Loginform {
     this.setSavedLogin();
   }
   bindEventListeners() {
-    document.querySelector('#login-form').addEventListener('submit', this.loginUser);
+    document.querySelector('#login-form').addEventListener(
+      'submit', 
+      this.loginUser
+    );
   }
   setSavedLogin() {
     const storedUsername = localStorage.getItem('storedUsername');

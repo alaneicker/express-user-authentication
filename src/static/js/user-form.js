@@ -3,8 +3,14 @@ class UserForm {
     this.bindEventListeners();
   }
   bindEventListeners() {
-    document.querySelector('#user-form').addEventListener('submit', this.submitUserForm);
-    document.querySelector('[data-toggle-password]').addEventListener('click', this.togglePassword);
+    document.querySelector('#user-form').addEventListener(
+      'submit', 
+      this.submitUserForm
+    );
+    document.querySelector('[data-toggle-password]').addEventListener(
+      'click', 
+      this.togglePassword
+    );
   }
   togglePassword(e) {
     const input = document.querySelector(e.currentTarget.getAttribute('data-toggle-password'));
