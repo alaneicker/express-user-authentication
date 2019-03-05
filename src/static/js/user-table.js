@@ -16,3 +16,15 @@ const deleteUser = () => {
       console.log(err);
     });
 };
+
+class UserDeletion {
+  constructor() {
+    this.userId = null;
+  }
+  setUserToDelete() {
+
+  }
+  deleteUser() {
+
+  }
+}
