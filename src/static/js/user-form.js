@@ -32,7 +32,7 @@ document.querySelector('#user-form').addEventListener('submit', e => {
     axios[method](url, formData)
       .then(res => {
         if (res.data.stmt.changes > 0) {
-          location.href = '/account/dashboard';
+          location.href = '/account/dashboard?update=success';
         } else {
           // show flash error message
         }

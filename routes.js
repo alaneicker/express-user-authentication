@@ -35,8 +35,9 @@ routes.get('/logout', (req, res) => {
 routes.get('/account/dashboard', routeguard.validateToken, async (req, res) => {
   const users = await db.all('SELECT * FROM Users');
   const currentUser = req.decoded.username;
+  const queryString = req.query || null;
 
-  return res.render('dashboard', { users, currentUser });
+  return res.render('dashboard', { users, currentUser, queryString });
 });
 
 // Add user
