@@ -6,7 +6,7 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
   return data;
 }, {});
 
-togglePassword = e => {
+const togglePassword = e => {
   const passwordInput = document.querySelector('#password');
   passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
 };
