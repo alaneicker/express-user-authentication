@@ -17,9 +17,7 @@ document.querySelector('#user-form').addEventListener('submit', e => {
   const formData = formToJSON(form.elements);
   const userId = document.querySelector('#user-id').value;
   const method = formType === 'add' ? 'post' : 'put';
-  const url = formType === 'add'
-    ? `http://localhost:9000/user/create`
-    : `http://localhost:9000/user/update/${userId}`;
+  const url = formType === 'add' ? `/user/create` : `/user/update/${userId}`;
 
   e.preventDefault();
 

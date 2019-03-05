@@ -20,7 +20,7 @@ document.querySelector('#login-form').addEventListener('submit', e => {
 
     setLoadingBtn('#login-btn');
 
-    axios.post('http://localhost:9000/user/authenticate', { username, password })
+    axios.post('/user/authenticate', { username, password })
     .then(res => {
       const { auth, token } = res.data;
 
