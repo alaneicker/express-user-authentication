@@ -1,3 +1,6 @@
+// ADD OR UPDATE USER
+// ------------------------------------------------------------
+
 // form to json
 const formToJSON = elements => [].reduce.call(elements, (data, element) => {
   if (element.name) {
@@ -8,10 +11,10 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
 }, {});
 
 // Toggle password visibility
-document.querySelector('#btn-show-password').addEventListener('click', e => {
+togglePassword = e => {
   const passwordInput = document.querySelector('#password');
   passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
-});
+};
 
 // Validate user form
 document.querySelector('#user-form').addEventListener('submit', e => {
@@ -45,12 +48,3 @@ document.querySelector('#user-form').addEventListener('submit', e => {
 
   form.classList.add('was-validated');
 });
-
-// Delete User
-Array.prototype.forEach.call(document.querySelectorAll('.delete-btn'), btn => {
-  btn.addEventListener('click', e => {
-    const userId = e.target.getAttribute('data-user-id');
-
-    // POST to /user/delete/:id
-  });
-})

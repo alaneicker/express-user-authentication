@@ -1,3 +1,5 @@
+// USER LOGIN
+// ------------------------------------------------------------
 const storedUsername = localStorage.getItem('storedUsername');
 
 if (storedUsername) {

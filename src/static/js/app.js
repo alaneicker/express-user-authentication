@@ -28,3 +28,21 @@ const setMessaging = (type, message) => {
     </div>
   `;
 }
+
+const showModal = id => {
+  const modal = document.querySelector(id);
+  const overlay = document.createElement('div');
+
+  overlay.setAttribute('class', 'modal-backdrop show');
+  overlay.id = 'modal-overlay';
+  modal.style.display = 'block';
+
+  document.body.appendChild(overlay);
+};
+
+const hideModal = id => {
+  const modal = document.querySelector(id);
+
+  modal.style.display = 'none';
+  document.body.removeChild(document.querySelector('#modal-overlay'))
+}

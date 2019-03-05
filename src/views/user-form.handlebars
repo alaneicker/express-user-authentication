@@ -28,7 +28,7 @@
             <div class="form-group">
               <label class="font-weight-bold text-dark" for="password">
                 Password
-                <button id="btn-show-password" class="btn-show-password" type="button" title="toggle password visibility">
+                <button class="btn-show-password" type="button" title="toggle password visibility" onClick="togglePassword()">
                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="20px" height="20px" viewBox="0 0 98.48 98.48" style="enable-background:new 0 0 98.48 98.48;" xml:space="preserve">
                     <path d="M97.204,45.788c-0.865-1.02-21.537-24.945-47.963-24.945c-26.427,0-47.098,23.925-47.965,24.946
@@ -56,6 +56,6 @@
 </div>
 
 {{#contentFor "scripts"}}
-<script src="/js/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="/js/user-form.js"></script>
 {{/contentFor}}
