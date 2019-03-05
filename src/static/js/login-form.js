@@ -28,7 +28,7 @@ document.querySelector('#login-form').addEventListener('submit', e => {
         location.href = '/account/dashboard';
       } else {
         unsetLoadingButton('#login-btn');
-        document.querySelector('#auth-error').classList.remove('d-none');
+        setMessaging('error', 'The username or password is invalid')
       }
     })
     .catch(err => {

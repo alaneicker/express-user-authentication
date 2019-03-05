@@ -32,9 +32,14 @@ document.querySelector('#user-form').addEventListener('submit', e => {
     axios[method](url, formData)
       .then(res => {
         if (res.data.stmt.changes > 0) {
-          unsetLoadingButton('#submit-btn');
-          // show flash message
+          location.href = '/account/dashboard';
+        } else {
+          // show flash error message
         }
+      })
+      .catch(err => {
+        console.log(err);
+        // show flash error message
       });    
   }
 
