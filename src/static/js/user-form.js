@@ -1,7 +1,3 @@
-// ADD OR UPDATE USER
-// ------------------------------------------------------------
-
-// form to json
 const formToJSON = elements => [].reduce.call(elements, (data, element) => {
   if (element.name) {
     data[element.name] = element.value;
@@ -10,13 +6,11 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
   return data;
 }, {});
 
-// Toggle password visibility
 togglePassword = e => {
   const passwordInput = document.querySelector('#password');
   passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
 };
 
-// Validate user form
 document.querySelector('#user-form').addEventListener('submit', e => {
   const form = e.target;
   const formType = e.target.getAttribute('data-form');
@@ -37,12 +31,12 @@ document.querySelector('#user-form').addEventListener('submit', e => {
         if (res.data.stmt.changes > 0) {
           location.href = '/account/dashboard?update=success';
         } else {
-          // show flash error message
+          setMessaging('error', 'Error saving user.');
         }
       })
       .catch(err => {
         console.log(err);
-        // show flash error message
+        setMessaging('error', 'Error saving user.');
       });    
   }
 

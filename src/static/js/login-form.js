@@ -7,7 +7,7 @@ if (storedUsername) {
 }
 
 document.querySelector('#login-form').addEventListener('submit', e => {
-  const form = e.target;
+  const form = document.querySelector('#login-form');
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
   const remember = document.querySelector('#remember');
