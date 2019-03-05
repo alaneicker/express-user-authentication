@@ -46,3 +46,10 @@ const hideModal = id => {
   modal.style.display = 'none';
   document.body.removeChild(document.querySelector('#modal-overlay'))
 }
+
+Array.prototype.forEach.call(document.querySelectorAll('[data-dismiss]'), btn => {
+  btn.addEventListener('click', e =>  {
+    const modalId = e.currentTarget.getAttribute('data-dismiss');
+    hideModal(modalId);
+  });
+});
